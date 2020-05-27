@@ -37,7 +37,7 @@ class Usuario{
     public function getSenha(){
         return $this->senha;
     }
-    public function setSenha(senha_){
+    public function setSenha($senha_){
         $this->senha = $senha_;
     }
 }
