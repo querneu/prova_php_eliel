@@ -1,6 +1,6 @@
 <?php 
 class Usuario{
-    private $d;
+    private $id;
     private $nome;
     private $sobrenome;
     private $apelido;
