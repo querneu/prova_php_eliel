@@ -1,10 +1,10 @@
 <?php 
-class Usuarios{
-    private id;
-    private nome;
-    private sobrenome;
-    private apelido;
-    private senha;
+class Usuario{
+    private $d;
+    private $nome;
+    private $sobrenome;
+    private $apelido;
+    private $senha;
 
     public function getId(){
         return $this->id;
