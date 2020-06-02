@@ -12,7 +12,7 @@ class UsuarioDao{
                                         login e senha informados estão corretos e tente
                                         novamente</p>");
             }
-            $conexao = new PDO('mysql:host=localhost;prova','root','');
+            $conexao = new PDO('mysql:host=localhost;','root','');
             $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $resultado = $conexao->prepare($sql);
             $resultado->bindValue(":apelido",$login);
@@ -26,7 +26,7 @@ class UsuarioDao{
             }
             return $lista_lateral;
         }catch(Exception $e){
-            print($e->getMessagE());
+            print($e->getMessage());
         }
     }
 
@@ -82,7 +82,7 @@ class UsuarioDao{
 
     public function Alterar(Usuario $usuario){
         try{
-            $sql = "UPDATE FROM prova.usuarios SET nome = :nome, sobrenome = :sobrenome, usuario = :usuario, senha = :senha";
+            $sql = "UPDATE FROM prova.usuarios SET nome = :nome, sobrenome = :sobrenome, usuario = :usuario, senha = :senha WHERE id = :id";
             $conexao = new PDO('mysql:host=localhost;','root','');
             $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $resultado = $conexao->prepare($sql);
@@ -90,6 +90,7 @@ class UsuarioDao{
             $resultado->bindValue(":sobrenome",$usuario->getSobrenome());
             $resultado->bindValue(":apelido",$usuario->getApelido());
             $resultado->bindValue(":senha",$usuario->getSenha());
+            $resultado->bindValue(":id",$usuario->getId());
             $resultado->execute();
             $conexao=null;
             if($resultado == TRUE){

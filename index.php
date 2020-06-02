@@ -1,7 +1,7 @@
 <?php 
 session_start();
 if(isset($_SESSION['usuarioLogado'])){
-        header("Location: http://localhost/pages/Gerenciador.php");   
+        header("Location: http://localhost/prova/pages/Gerenciador.php");   
     }
 
 require_once('./model/Usuario.class.php');
@@ -20,13 +20,40 @@ if(isset($_POST['nome']) && isset($_POST['sobrenome']) && isset($_POST['apelido'
     $usuario->setSobrenome($sobrenome);
     $usuario->setApelido($apelido);
     $usuario->setSenha($senha);
-    $udao->Inserir($usuario);
-    if($udao){
-        echo    "<script>alert('Cadastrado com sucesso');</script>"; 
+    try{
+        $udao->Inserir($usuario);
+        if($udao){
+            echo    "<script>alert('Cadastrado com sucesso');</script>"; 
+        }
+    }catch(Exception $e){
+        print($e->getMessagE());
     }
 }elseif(isset($_POST['senha']) && isset($_POST['apelido'])){
     $apelido = $_POST['apelido'];
     $senha = $_POST['senha'];
+    try{
+        $logado = $udao->Logar($apelido,$senha);
+        if(isset($logado)){
+            if(!empty($logado)){
+                print(sizeof($logado));
+                foreach($logado as $linha){
+                    $_SESSION['usuarioLogado'] = array(
+                    "id_usuario" => $linha->getId(),
+                    "nome" => $linha->getNome(),
+                    "sobrenome" => $linha->getSobrenome(),
+                    "apelido" => $linha->getApelido(),
+                    "senha" => $linha->getSenha()
+                    );
+                    echo '<script type="text/javascript"> window.location.replace("pages/Gerenciador.php"); </script>';
+                    
+                }
+            }else{
+                echo '<p class="help-block text-danger">Usuário ou senha incorretos!</p>';
+            }
+        }
+    }catch(Exception $e){
+        print($e->getMessage());
+    }
 
 }
 ?>
@@ -88,7 +115,7 @@ if(isset($_POST['nome']) && isset($_POST['sobrenome']) && isset($_POST['apelido'
         <div class="modal-dialog">
             <div class="modal-content text-white bg-dark">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalCadastroLabel">Modal title</h5>
+                    <h5 class="modal-title" id="modalCadastroLabel">Cadastro</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>

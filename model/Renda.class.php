@@ -4,7 +4,7 @@ class Renda{
     private $usuario;
     private $trabalho;
     private $rendimento;
-    private $data;
+    private $mes;
 
     public function getId(){
         return $this->id;
@@ -34,11 +34,11 @@ class Renda{
         $this->rendimento = $rendimento_;
     }
 
-    public function getData(){
-        return $this->data;
+    public function getMes(){
+        return $this->mes;
     }
-    public function setData($data_){
-        $this->data=$data_;
+    public function setMes($mes_){
+        $this->mes=$mes_;
     }
 }
 ?>

@@ -5,7 +5,7 @@ class Despesa{
     private $contas;
     private $alimentacao;
     private $combustivel;
-    private $data;
+    private $mes;
 
     public function getId(){
         return $this->id;
@@ -15,7 +15,7 @@ class Despesa{
     }
 
     public function getUsuario(){
-        return $this->id;
+        return $this->usuario;
     }
     public function setUsuario($usuario_){
         $this->usuario = $usuario_;
@@ -42,11 +42,11 @@ class Despesa{
         $this->combustivel = $combustivel_;
     }
 
-    public function getData(){
-        return $this->data;
+    public function getMes(){
+        return $this->mes;
     }
-    public function setData($data_){
-        $this->data=$data_;
+    public function setMes($mes_){
+        $this->mes=$mes_;
     }
 }
 ?>
